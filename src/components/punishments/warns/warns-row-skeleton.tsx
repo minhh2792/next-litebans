@@ -17,6 +17,9 @@ export const WarnsRowSkeleton = () => (
     <TableCell className="w-[215px]">
       <Skeleton className="w-20 md:w-[132px] h-4" />
     </TableCell>
+    <TableCell className="w-[200px]">
+      <Skeleton className="w-24 h-4" />
+    </TableCell>
     <TableCell className="w-[150px]">
       <Skeleton className="mx-auto size-3 rounded-sm" />
     </TableCell>

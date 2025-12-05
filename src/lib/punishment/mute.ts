@@ -6,6 +6,7 @@ import { PunishmentListItem } from "@/types";
 import { db } from "../db";
 import { getPlayerName } from "./punishment";
 import { Dictionary } from "../language/types";
+import p from "../language/utils/parse";
 
 const getMuteCount = async (player?: string, staff?: string) => {
   const count = await db.litebans_mutes.count({
@@ -33,7 +34,11 @@ const getMutes = async (page: number, player?: string, staff?: string) => {
       reason: true,
       time: true,
       until: true,
-      active: true
+      active: true,
+      removed_by_uuid: true,
+      removed_by_name: true,
+      removed_by_reason: true,
+      removed_by_date: true
     },
     orderBy: {
       time: "desc"
@@ -45,17 +50,26 @@ const getMutes = async (page: number, player?: string, staff?: string) => {
 
 const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]) => {
 
+  const now = new Date();
   const sanitized = await Promise.all(mutes.map(async (mute) => {
     const name = await getPlayerName(mute.uuid!);
-    const until = mute.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(mute.until.toString()));
+    const revoked = Boolean(mute.removed_by_uuid || mute.removed_by_name || mute.removed_by_reason);
+    const removalDate = revoked && mute.removed_by_date ? new Date(mute.removed_by_date) : undefined;
     const active = typeof mute.active === "boolean" ? mute.active : mute.active === "1";
+    const removalFallbackDate = removalDate ?? new Date(parseInt(mute.time.toString()));
+    const until = revoked ? removalFallbackDate : (mute.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(mute.until.toString())));
     return {
       ...mute,
       id: mute.id.toString(),
       time: new Date(parseInt(mute.time.toString())),
+      removed_by_date: removalDate,
+      revoked,
+      statusTooltip: revoked && mute.removed_by_name ? p(dictionary.table.active.revoked, { staff: mute.removed_by_name }) :
+                     revoked ? dictionary.table.active.revoked :
+                     undefined,
       status: until == dictionary.table.permanent ? 
                 (active ? true : false) : 
-                (until < new Date() ? false : undefined),
+                (revoked ? false : (typeof until === "string" ? active : until < now ? false : undefined)),
       console: mute.banned_by_uuid === siteConfig.console.uuid,
       permanent: until == dictionary.table.permanent,
       active,
@@ -82,7 +96,11 @@ const getMute = async (id: number, dictionary: Dictionary) => {
       until: true,
       ipban: true,
       active: true,
-      server_origin: true
+      server_origin: true,
+      removed_by_uuid: true,
+      removed_by_name: true,
+      removed_by_reason: true,
+      removed_by_date: true
     }
   });
 

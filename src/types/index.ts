@@ -21,4 +21,10 @@ export type PunishmentListItem = {
   until: bigint | number
   active: boolean | string
   type?: PunishmentType
+  removed_by_uuid?: string | null
+  removed_by_name?: string | null
+  removed_by_reason?: string | null
+  removed_by_date?: Date | string | null
+  revoked?: boolean
+  statusTooltip?: string
 }

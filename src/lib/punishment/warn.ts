@@ -33,7 +33,11 @@ const getWarns = async (page: number, player?: string, staff?: string) => {
       time: true,
       until: true,
       active: true,
-      warned: true
+      warned: true,
+      removed_by_uuid: true,
+      removed_by_name: true,
+      removed_by_reason: true,
+      removed_by_date: true
     },
     orderBy: {
       time: "desc"
@@ -47,13 +51,20 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
 
   const sanitized = await Promise.all(warns.map(async (warn) => {
     const name = await getPlayerName(warn.uuid!);
+    const revoked = Boolean(warn.removed_by_uuid || warn.removed_by_name || warn.removed_by_reason);
+    const removalDate = revoked && warn.removed_by_date ? new Date(warn.removed_by_date) : undefined;
+    const untilValue = revoked ? removalDate : (warn.until && warn.until.toString() !== "0" ? new Date(parseInt(warn.until.toString())) : undefined);
+    const active = typeof warn.active === "boolean" ? warn.active : warn.active === "1";
     return {
       ...warn,
       id: warn.id.toString(),
       time: new Date(parseInt(warn.time.toString())),
       console: warn.banned_by_uuid === siteConfig.console.uuid,
-      active: typeof warn.active === "boolean" ? warn.active : warn.active === "1",
+      active,
       warned: typeof warn.warned === "boolean" ? warn.warned : warn.warned === "1",
+      removed_by_date: removalDate,
+      revoked,
+      until: untilValue,
       name
     }
   }));
@@ -76,7 +87,11 @@ const getWarn = async (id: number) => {
       until: true,
       active: true,
       server_origin: true,
-      warned: true
+      warned: true,
+      removed_by_uuid: true,
+      removed_by_name: true,
+      removed_by_reason: true,
+      removed_by_date: true
     }
   });
 

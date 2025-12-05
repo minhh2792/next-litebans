@@ -11,17 +11,23 @@ import {
 interface PunishmentStatusDotProps {
   dictionary: Dictionary
   status: boolean | undefined
+  tooltipOverride?: string
+  variant?: "revoked"
 }
 
 export const PunishmentStatusDot = ({
   dictionary,
-  status
+  status,
+  tooltipOverride,
+  variant
 }: PunishmentStatusDotProps) => (
   <TooltipProvider delayDuration={50}>
     <Tooltip>
       <TooltipTrigger asChild>
         <span 
           className={cn(
+            variant === "revoked" ?
+              "bg-blue-500" :
             status === undefined ? 
               "bg-orange-500" :
               status ? "bg-green-500" : "bg-red-500",
@@ -30,7 +36,7 @@ export const PunishmentStatusDot = ({
         /> 
       </TooltipTrigger>
       <TooltipContent>
-        {status === undefined ? dictionary.table.active.temporal : (status ? dictionary.table.active.true : dictionary.table.active.false)}
+        {tooltipOverride ?? (status === undefined ? dictionary.table.active.temporal : (status ? dictionary.table.active.true : dictionary.table.active.false))}
       </TooltipContent>
     </Tooltip>
   </TooltipProvider>

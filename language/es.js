@@ -57,8 +57,10 @@ const language = {
         active: {
           true: "Activo",
           temporal: "Temporal",
-          false: "Expirado"
-        }
+          false: "Expirado",
+          revoked: "Revocado"
+        },
+        revoked_by: "Revocado por {staff}"
       }
     },
     bans: {
@@ -77,8 +79,10 @@ const language = {
         active: {
           true: "Activo",
           temporal: "Temporal",
-          false: "Expirado"
-        }
+          false: "Expirado",
+          revoked: "Desbaneado"
+        },
+        revoked_by: "Desbaneado por {staff}"
       },
       info: {
         title: "Baneo #{id}",
@@ -86,6 +90,7 @@ const language = {
           ipban: "Baneo de IP",
           active: "Activo",
           expired: "Expirado",
+          revoked: "Desbaneado",
           permanent: "Permanente",
         }
       }
@@ -106,8 +111,10 @@ const language = {
         active: {
           true: "Activo",
           temporal: "Temporal",
-          false: "Expirado"
-        }
+          false: "Expirado",
+          revoked: "Desmuteado"
+        },
+        revoked_by: "Desmuteado por {staff}"
       },
       info: {
         title: "Muteo #{id}",
@@ -115,6 +122,7 @@ const language = {
           ipmute: "Muteo de IP",
           active: "Activo",
           expired: "Expirado",
+          revoked: "Desmuteado",
           permanent: "Permanente",
         }
       }
@@ -129,8 +137,15 @@ const language = {
           by: "Avisado por",
           reason: "Razón",
           date: "Fecha",
+          status: "Estado",
           notified: "Notificado"
-        }
+        },
+        active: {
+          true: "Activo",
+          false: "Inactivo",
+          revoked: "Aviso revocado"
+        },
+        revoked_by: "Aviso revocado por {staff}"
       },
       info: {
         title: "Aviso #{id}"

@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { IoCalendar } from "react-icons/io5";
-import { PiScrollFill } from "react-icons/pi";
+import { PiProhibitBold, PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 import { PiClockCountdownBold } from "react-icons/pi";
 
@@ -81,10 +81,13 @@ export default async function Mute({
           {mute.ipban && (
             <Badge variant="secondary">{localDictionary.info.badges.ipmute}</Badge>
           )}
-          {mute.active && (
+          {mute.revoked && (
+            <Badge variant="secondary">{localDictionary.info.badges.revoked}</Badge>
+          )}
+          {(!mute.revoked && mute.active) && (
             <Badge variant="secondary">{localDictionary.info.badges.active}</Badge>
           )}
-          {(mute.status !== undefined && !mute.status) && (
+          {(!mute.revoked && mute.status !== undefined && !mute.status) && (
             <Badge variant="secondary">{localDictionary.info.badges.expired}</Badge>
           )}
           {(mute.permanent && mute.status) && (
@@ -114,6 +117,18 @@ export default async function Mute({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{mute.server}</p>
           </div>
+          {mute.revoked && (
+            <div className="space-y-1">
+              <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              <p>{p(localDictionary.table.revoked_by, { staff: mute.removed_by_name ?? dictionary.words.staff })}</p>
+              {mute.removed_by_reason && (
+                <p className="text-sm text-muted-foreground">{mute.removed_by_reason}</p>
+              )}
+              {mute.removed_by_date instanceof Date && (
+                <RelativeTimeTooltip lang={lang} time={mute.removed_by_date} />
+              )}
+            </div>
+          )}
         </PunishmentInfoCard>
 
         <div className="block md:hidden order-3 mx-auto space-y-4 w-[350px]">
@@ -136,6 +151,20 @@ export default async function Mute({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{mute.server}</p>
           </div>
+          {mute.revoked && (
+            <div className="space-y-1 inline-flex flex-col w-full">
+              <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              <p className="mx-auto">{p(localDictionary.table.revoked_by, { staff: mute.removed_by_name ?? dictionary.words.staff })}</p>
+              {mute.removed_by_reason && (
+                <p className="text-xs text-muted-foreground text-center">{mute.removed_by_reason}</p>
+              )}
+              {mute.removed_by_date instanceof Date && (
+                <div className="mx-auto">
+                  <RelativeTimeTooltip lang={lang} time={mute.removed_by_date}/>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </div>

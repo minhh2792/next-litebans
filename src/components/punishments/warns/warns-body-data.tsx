@@ -1,11 +1,14 @@
 import { FaCheck } from "react-icons/fa6";
 import { FaTimes } from "react-icons/fa";
 
+import { Dictionary } from "@/lib/language/types";
+import p from "@/lib/language/utils/parse";
 import { getWarns, sanitizeWarns } from "@/lib/punishment/warn";
 
 import { AvatarName } from "@/components/table/avatar-name";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
+import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
 import {
   TableBody,
   TableCell,
@@ -14,6 +17,7 @@ import {
 
 interface WarnsBodyDataProps {
   language: string;
+  dictionary: Dictionary;
   page: number;
   player?: string;
   staff?: string;
@@ -21,11 +25,13 @@ interface WarnsBodyDataProps {
 
 export const WarnsBodyData = async ({
   language,
+  dictionary,
   page,
   player,
   staff
 }: WarnsBodyDataProps) => {
 
+  const localDictionary = dictionary.pages.warns;
   const dbWarns = await getWarns(page, player, staff);
   const warns = await sanitizeWarns(dbWarns);
 
@@ -44,6 +50,29 @@ export const WarnsBodyData = async ({
           </TableCell>
           <TableCell className="w-[215px]">
             <RelativeTimeTooltip lang={language} time={warn.time} />
+          </TableCell>
+          <TableCell className="w-[200px]">
+            <div className="space-y-1">
+              <p className="flex items-center">
+                <PunishmentStatusDot
+                  dictionary={localDictionary}
+                  status={warn.revoked ? false : warn.active}
+                  tooltipOverride={warn.revoked ? localDictionary.table.active.revoked : undefined}
+                  variant={warn.revoked ? "revoked" : undefined}
+                />
+                {warn.until instanceof Date && (
+                  <RelativeTimeTooltip lang={language} time={warn.until} />
+                )}
+              </p>
+              {warn.revoked && warn.removed_by_name && (
+                <p className="text-xs text-muted-foreground">
+                  {p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}
+                </p>
+              )}
+              {warn.revoked && warn.removed_by_reason && (
+                <p className="text-xs text-muted-foreground">{warn.removed_by_reason}</p>
+              )}
+            </div>
           </TableCell>
           <TableCell className="w-[150px]">
             {warn.warned ?

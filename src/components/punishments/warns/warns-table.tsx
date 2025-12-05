@@ -46,12 +46,13 @@ export const WarnsTable = async ({
               <TableHead className="text-center">{localDictionary.table.heads.by}</TableHead>
               <TableHead>{localDictionary.table.heads.reason}</TableHead>
               <TableHead>{localDictionary.table.heads.date}</TableHead>
+              <TableHead>{localDictionary.table.heads.status}</TableHead>
               <TableHead className="text-center">{localDictionary.table.heads.notified}</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
           <Suspense fallback={<WarnsBodySkeleton />}>
-            <WarnsBodyData language={lang} page={page} player={player} staff={staff} />
+            <WarnsBodyData language={lang} dictionary={dictionary} page={page} player={player} staff={staff} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />

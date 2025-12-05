@@ -57,8 +57,10 @@ const language = {
         active: {
           true: "Active",
           temporal: "Temporal",
-          false: "Expired"
-        }
+          false: "Expired",
+          revoked: "Revoked"
+        },
+        revoked_by: "Removed by {staff}"
       }
     },
     bans: {
@@ -77,8 +79,10 @@ const language = {
         active: {
           true: "Active",
           temporal: "Temporal",
-          false: "Expired"
-        }
+          false: "Expired",
+          revoked: "Unbanned"
+        },
+        revoked_by: "Unbanned by {staff}"
       },
       info: {
         title: "Ban #{id}",
@@ -86,6 +90,7 @@ const language = {
           ipban: "IP Ban",
           active: "Active",
           expired: "Expired",
+          revoked: "Unbanned",
           permanent: "Permanent",
         }
       }
@@ -106,8 +111,10 @@ const language = {
         active: {
           true: "Active",
           temporal: "Temporal",
-          false: "Expired"
-        }
+          false: "Expired",
+          revoked: "Unmuted"
+        },
+        revoked_by: "Unmuted by {staff}"
       },
       info: {
         title: "Mute #{id}",
@@ -115,6 +122,7 @@ const language = {
           ipmute: "IP Mute",
           active: "Active",
           expired: "Expired",
+          revoked: "Unmuted",
           permanent: "Permanent",
         }
       }
@@ -129,8 +137,15 @@ const language = {
           by: "Warned by",
           reason: "Reason",
           date: "Date",
+          status: "Status",
           notified: "Notified"
         },
+        active: {
+          true: "Active",
+          false: "Inactive",
+          revoked: "Unwarned"
+        },
+        revoked_by: "Unwarned by {staff}"
       },
       info: {
         title: "Warn #{id}"

@@ -57,8 +57,10 @@ const language = {
         active: {
           true: "Đang hiệu lực",
           temporal: "Có thời hạn",
-          false: "Đã hết hạn"
-        }
+          false: "Đã hết hạn",
+          revoked: "Đã gỡ"
+        },
+        revoked_by: "Gỡ bởi {staff}"
       }
     },
     bans: {
@@ -77,8 +79,10 @@ const language = {
         active: {
           true: "Đang hiệu lực",
           temporal: "Có thời hạn",
-          false: "Đã hết hạn"
-        }
+          false: "Đã hết hạn",
+          revoked: "Đã mở khoá"
+        },
+        revoked_by: "Mở khoá bởi {staff}"
       },
       info: {
         title: "Khoá tài khoản #{id}",
@@ -86,6 +90,7 @@ const language = {
           ipban: "Khoá IP",
           active: "Đang hiệu lực",
           expired: "Đã hết hạn",
+          revoked: "Đã mở khoá",
           permanent: "Vĩnh viễn",
         }
       }
@@ -106,8 +111,10 @@ const language = {
         active: {
           true: "Đang hiệu lực",
           temporal: "Có thời hạn",
-          false: "Đã hết hạn"
-        }
+          false: "Đã hết hạn",
+          revoked: "Đã gỡ cấm chat"
+        },
+        revoked_by: "Gỡ cấm chat bởi {staff}"
       },
       info: {
         title: "Cấm chat #{id}",
@@ -115,6 +122,7 @@ const language = {
           ipmute: "Cấm chat IP",
           active: "Đang hiệu lực",
           expired: "Đã hết hạn",
+          revoked: "Đã gỡ cấm chat",
           permanent: "Vĩnh viễn",
         }
       }
@@ -129,8 +137,15 @@ const language = {
           by: "Cảnh cáo bởi",
           reason: "Lý do",
           date: "Ngày",
+          status: "Trạng thái",
           notified: "Đã thông báo"
         },
+        active: {
+          true: "Hiệu lực",
+          false: "Không hiệu lực",
+          revoked: "Đã gỡ cảnh cáo"
+        },
+        revoked_by: "Gỡ cảnh cáo bởi {staff}"
       },
       info: {
         title: "Cảnh cáo #{id}"

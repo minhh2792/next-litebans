@@ -1,5 +1,6 @@
 import { Dictionary } from "@/lib/language/types";
 import { getMutes, sanitizeMutes } from "@/lib/punishment/mute";
+import p from "@/lib/language/utils/parse";
 
 import { AvatarName } from "@/components/table/avatar-name";
 import { PunishmentInfoButton } from "@/components/buttons/punishment-info-button";
@@ -48,10 +49,25 @@ export const MutesBodyData = async ({
             <RelativeTimeTooltip lang={language} time={mute.time} />
           </TableCell>
           <TableCell className="w-[215px]">
-            <p className="flex items-center">
-              <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
-              <RelativeTimeTooltip lang={language} time={mute.until} />
-            </p>
+            <div className="space-y-1">
+              <p className="flex items-center">
+                <PunishmentStatusDot
+                  dictionary={localDictionary}
+                  status={mute.status}
+                  tooltipOverride={mute.statusTooltip}
+                  variant={mute.revoked ? "revoked" : undefined}
+                />
+                <RelativeTimeTooltip lang={language} time={mute.until} />
+              </p>
+              {mute.revoked && mute.removed_by_name && (
+                <p className="text-xs text-muted-foreground">
+                    {p(localDictionary.table.revoked_by, { staff: mute.removed_by_name ?? dictionary.words.staff })}
+                </p>
+              )}
+              {mute.revoked && mute.removed_by_reason && (
+                <p className="text-xs text-muted-foreground">{mute.removed_by_reason}</p>
+              )}
+            </div>
           </TableCell>
           <TableCell className="!pl-0 !pr-3">
             <PunishmentInfoButton type="mute" id={mute.id} />

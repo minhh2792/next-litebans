@@ -1,5 +1,6 @@
 import { Dictionary } from "@/lib/language/types";
 import { getPunishments, sanitizePunishments } from "@/lib/punishment/punishment";
+import p from "@/lib/language/utils/parse";
 
 import { Badge } from "@/components/ui/badge";
 import { AvatarName } from "@/components/table/avatar-name";
@@ -55,11 +56,48 @@ export const HistoryBodyData = async ({
           </TableCell>
           <TableCell className="w-[205px]">
             { (punishment.type == "ban" || punishment.type == "mute") ?
-                <p className="flex items-center">
-                  <PunishmentStatusDot dictionary={localDictionary} status={punishment.status} />
-                  <RelativeTimeTooltip lang={language} time={punishment.until} />
-                </p>
-              : <p>{localDictionary.table.expire_not_applicable}</p>
+                <div className="space-y-1">
+                  <p className="flex items-center">
+                    <PunishmentStatusDot
+                      dictionary={localDictionary}
+                      status={punishment.status}
+                      tooltipOverride={punishment.statusTooltip}
+                      variant={punishment.revoked ? "revoked" : undefined}
+                    />
+                    <RelativeTimeTooltip lang={language} time={punishment.until} />
+                  </p>
+                  {punishment.revoked && punishment.removed_by_name && (
+                    <p className="text-xs text-muted-foreground">
+                      {p(localDictionary.table.revoked_by, { staff: punishment.removed_by_name ?? dictionary.words.staff })}
+                    </p>
+                  )}
+                  {punishment.revoked && punishment.removed_by_reason && (
+                    <p className="text-xs text-muted-foreground">{punishment.removed_by_reason}</p>
+                  )}
+                </div>
+              : punishment.revoked ? (
+                <div className="space-y-1">
+                  <p className="flex items-center">
+                    <PunishmentStatusDot
+                      dictionary={localDictionary}
+                      status={false}
+                      tooltipOverride={punishment.statusTooltip ?? localDictionary.table.active.revoked}
+                      variant="revoked"
+                    />
+                    {punishment.removed_by_date instanceof Date && (
+                      <RelativeTimeTooltip lang={language} time={punishment.removed_by_date} />
+                    )}
+                  </p>
+                  {punishment.removed_by_name && (
+                    <p className="text-xs text-muted-foreground">
+                      {p(localDictionary.table.revoked_by, { staff: punishment.removed_by_name ?? dictionary.words.staff })}
+                    </p>
+                  )}
+                  {punishment.removed_by_reason && (
+                    <p className="text-xs text-muted-foreground">{punishment.removed_by_reason}</p>
+                  )}
+                </div>
+              ) : <p>{localDictionary.table.expire_not_applicable}</p>
             }
           </TableCell>
           <TableCell className="!pl-0 !pr-3">

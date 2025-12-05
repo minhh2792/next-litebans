@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 
 import { IoCalendar } from "react-icons/io5";
-import { PiScrollFill } from "react-icons/pi";
+import { PiProhibitBold, PiScrollFill } from "react-icons/pi";
 import { FaEarthEurope } from "react-icons/fa6";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 
@@ -94,6 +94,18 @@ export default async function Warn({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{warn.server}</p>
           </div>
+          {warn.revoked && (
+            <div className="space-y-1">
+              <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              <p>{p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}</p>
+              {warn.removed_by_reason && (
+                <p className="text-sm text-muted-foreground">{warn.removed_by_reason}</p>
+              )}
+              {warn.removed_by_date instanceof Date && (
+                <RelativeTimeTooltip lang={lang} time={warn.removed_by_date} />
+              )}
+            </div>
+          )}
         </PunishmentInfoCard>
 
         <div className="block md:hidden order-3 mx-auto space-y-4 w-[350px]">
@@ -113,6 +125,20 @@ export default async function Warn({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{warn.server}</p>
           </div>
+          {warn.revoked && (
+            <div className="space-y-1 inline-flex flex-col w-full">
+              <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              <p className="mx-auto">{p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}</p>
+              {warn.removed_by_reason && (
+                <p className="text-xs text-muted-foreground text-center">{warn.removed_by_reason}</p>
+              )}
+              {warn.removed_by_date instanceof Date && (
+                <div className="mx-auto">
+                  <RelativeTimeTooltip lang={lang} time={warn.removed_by_date}/>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </div>
