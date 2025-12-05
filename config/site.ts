@@ -1,13 +1,14 @@
 export const siteConfig = {
-  title: "Next Litebans",
-  logo: "/logo.webp",
-  favicon: "/logo.webp",
+  title: "Lịch sử xử lý vi phạm tại MineVN",
+  logo: "/minevn.png",
+  favicon: "/minevn.png",
   languages: {
     available: [
       "en",
       "es",
+      "vi",
     ],
-    default: "en",
+    default: "vi",
   },
   console: {
     name: "Console", // Just for filter badge
@@ -19,135 +20,135 @@ export const siteConfig = {
   defaultPlayerLookup: "YoSoyVilla",
   // When enabled, body and bust images will show a steve skin
   bedrock: {
-    enabled: false,
+    enabled: true,
     prefix: "BP_",
   },
   openGraph: {
-    dateFormat: "yyyy-MM-dd hh:mm:ss",
+    dateFormat: "dd-MM-yyyy hh:mm:ss",
     pages: {
       main: {
         // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
         description: `
-        next-litebans punishment web interface.
+        Lịch sử xử lý vi phạm tại MineVN.
 
-        Total punishments: {total}
+        Đã xử lý: {total}
 
-          🚫 Bans: {bans}
-          🔇 Mutes: {mutes}
-          ⚠️ Warns: {warns}
-          ❌ Kicks: {kicks}
+          🚫 Khoá tài khoản: {bans}
+          🔇 Khoá chat: {mutes}
+          ⚠️ Cảnh cáo: {warns}
+          ❌ Kick: {kicks}
         `
       },
       history: {
         // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
         description: `
-        Total punishments: {total}
+        Tổng số vi phạm đã xử lý: {total}
 
-          🚫 Bans: {bans}
-          🔇 Mutes: {mutes}
-          ⚠️ Warns: {warns}
-          ❌ Kicks: {kicks}
+          🚫 Khoá tài khoản: {bans}
+          🔇 Khoá chat: {mutes}
+          ⚠️ Cảnh cáo: {warns}
+          ❌ Kick: {kicks}
         `
       },
       player: {
         // Placeholders: {name}, {total}, {bans}, {mutes}, {kicks}, {warns}
         description: `
-        {name}'s punishments.
+        Vi phạm của {name}.
 
-        Total punishments: {total}
+        Tổng số vi phạm đã xử lý: {total}
 
-          🚫 Bans: {bans}
-          🔇 Mutes: {mutes}
-          ⚠️ Warns: {warns}
-          ❌ Kicks: {kicks}
+          🚫 Khoá tài khoản: {bans}
+          🔇 Khoá chat: {mutes}
+          ⚠️ Cảnh cáo: {warns}
+          ❌ Kick: {kicks}
         `,
         bans: {
           description: `
-          {name}'s bans.
+          Khoá tài khoản của {name}.
 
-          Total bans: {total}
+          Tổng số khoá tài khoản: {total}
           `,
         },
         mutes: {
           description: `
-          {name}'s mutes.
+          Khoá chat của {name}.
 
-          Total mutes: {total}
+          Tổng số khoá chat: {total}
           `,
         },
         warns: {
           description: `
-          {name}'s warns.
+          Cảnh cáo của {name}.
 
-          Total warns: {total}
+          Tổng số cảnh cáo: {total}
           `,
         },
         kicks: {
           description: `
-          {name}'s kicks.
+          Kick của {name}.
 
-          Total kicks: {total}
+          Tổng số kick: {total}
           `,
         },
       },
       bans: {
         // Placeholders: {total}
-        description: "Total bans: {total}"
+        description: "Tổng số khoá tài khoản: {total}"
       },
       mutes: {
         // Placeholders: {total}
-        description: "Total mutes: {total}"
+        description: "Tổng số khoá chat: {total}"
       },
       warns: {
         // Placeholders: {total}
-        description: "Total warns: {total}"
+        description: "Tổng số cảnh cáo: {total}"
       },
       kicks: {
         // Placeholders: {total}
-        description: "Total kicks: {total}"
+        description: "Tổng số kick: {total}"
       },
     },
     punishments: {
       ban: {
         // Placeholders: {name}, {staff}, {reason}, {time}, {duration}, {server}
         description: `
-        👤 User: {name}
+        👤 Người chơi: {name}
         👮 Staff: {staff}
 
-        📜 Reason: {reason}
-        🕒 Date: {time}
-        ⌛ Duration: {duration}
+        📜 Lý do: {reason}
+        🕒 Thời gian: {time}
+        ⌛ Thời hạn: {duration}
         `
       },
       mute: {
         // Placeholders: {name}, {staff}, {reason}, {time}, {duration}, {server}
         description: `
-        👤 User: {name}
+        👤 Người chơi: {name}
         👮 Staff: {staff}
 
-        📜 Reason: {reason}
-        🕒 Date: {time}
-        ⌛ Duration: {duration}
+        📜 Lý do: {reason}
+        🕒 Thời gian: {time}
+        ⌛ Thời hạn: {duration}
         `
       },
       warn: {
         // Placeholders: {name}, {staff}, {reason}, {time}, {server}
         description: `
-        👤 User: {name}
+        👤 Người chơi: {name}
         👮 Staff: {staff}
 
-        📜 Reason: {reason}
-        🕒 Date: {time}
+        📜 Lý do: {reason}
+        🕒 Thời gian: {time}
         `
       },
       kick: {
         // Placeholders: {name}, {staff}, {reason}, {time}, {server}
         description: `
-        👤 User: {name}
+        👤 Người chơi: {name}
         👮 Staff: {staff}
 
-        📜 Reason: {reason}
-        🕒 Date: {time}
+        📜 Lý do: {reason}
+        🕒 Thời gian: {time}
         `
       }
     }
