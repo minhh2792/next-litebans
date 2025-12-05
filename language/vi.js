@@ -12,8 +12,8 @@ const language = {
       plural: "Khoá tài khoản"
     },
     mutes: {
-      singular: "Khoá chat",
-      plural: "Khoá chat"
+      singular: "Cấm chat",
+      plural: "Cấm chat"
     },
     kicks: {
       singular: "Kick",
@@ -91,18 +91,18 @@ const language = {
       }
     },
     mutes: {
-      title: "Khoá chat",
+      title: "Cấm chat",
       // Placeholders: {total}
-      subtitle: "Số lượng khoá chat: {total}",
+      subtitle: "Số lượng cấm chat: {total}",
       table: {
         heads: {
           player: "Người chơi",
-          by: "Khoá chat bởi",
+          by: "Cấm chat bởi",
           reason: "Lý do",
           date: "Ngày",
           expires: "Hết hạn"
         },
-        permanent: "Khoá chat vĩnh viễn",
+        permanent: "Cấm chat vĩnh viễn",
         active: {
           true: "Đang hiệu lực",
           temporal: "Có thời hạn",
@@ -110,9 +110,9 @@ const language = {
         }
       },
       info: {
-        title: "Khoá chat #{id}",
+        title: "Cấm chat #{id}",
         badges: {
-          ipmute: "Khoá chat IP",
+          ipmute: "Cấm chat IP",
           active: "Đang hiệu lực",
           expired: "Đã hết hạn",
           permanent: "Vĩnh viễn",

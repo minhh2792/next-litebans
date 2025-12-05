@@ -1,0 +1,18 @@
+services:
+  app:
+    image: augustinominh/next-litebans:latest
+    container_name: next-litebans
+    tty: true
+    stdin_open: true
+    environment:
+      DATABASE_URL: mysql://user:password@db:3306/litebans
+      SITE_URL: http://localhost:3000
+      NODE_ENV: production
+    ports:
+      - "3000:3000"
+    networks:
+      - minevn
+
+networks:
+  minevn:
+    external: true

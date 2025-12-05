@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: "Lịch sử xử lý vi phạm tại MineVN",
+  title: "MineVN Puinishments",
   logo: "/minevn.png",
   favicon: "/minevn.png",
   languages: {
@@ -17,7 +17,7 @@ export const siteConfig = {
     body: "/console-body.webp",
     bust: "/console-bust.webp",
   },
-  defaultPlayerLookup: "YoSoyVilla",
+  defaultPlayerLookup: "CursedKiwi",
   // When enabled, body and bust images will show a steve skin
   bedrock: {
     enabled: true,
@@ -34,7 +34,7 @@ export const siteConfig = {
         Đã xử lý: {total}
 
           🚫 Khoá tài khoản: {bans}
-          🔇 Khoá chat: {mutes}
+          🔇 Cấm chat: {mutes}
           ⚠️ Cảnh cáo: {warns}
           ❌ Kick: {kicks}
         `
@@ -45,7 +45,7 @@ export const siteConfig = {
         Tổng số vi phạm đã xử lý: {total}
 
           🚫 Khoá tài khoản: {bans}
-          🔇 Khoá chat: {mutes}
+          🔇 Cấm chat: {mutes}
           ⚠️ Cảnh cáo: {warns}
           ❌ Kick: {kicks}
         `
@@ -58,7 +58,7 @@ export const siteConfig = {
         Tổng số vi phạm đã xử lý: {total}
 
           🚫 Khoá tài khoản: {bans}
-          🔇 Khoá chat: {mutes}
+          🔇 Cấm chat: {mutes}
           ⚠️ Cảnh cáo: {warns}
           ❌ Kick: {kicks}
         `,
@@ -71,9 +71,9 @@ export const siteConfig = {
         },
         mutes: {
           description: `
-          Khoá chat của {name}.
+          Cấm chat của {name}.
 
-          Tổng số khoá chat: {total}
+          Tổng số Cấm chat: {total}
           `,
         },
         warns: {
@@ -97,7 +97,7 @@ export const siteConfig = {
       },
       mutes: {
         // Placeholders: {total}
-        description: "Tổng số khoá chat: {total}"
+        description: "Tổng số cấm chat: {total}"
       },
       warns: {
         // Placeholders: {total}
