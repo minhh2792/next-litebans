@@ -32,7 +32,8 @@ const getKicks = async (page: number, player?: string, staff?: string) => {
       reason: true,
       time: true,
       until: true,
-      active: true
+      active: true,
+      server_origin: true
     },
     orderBy: {
       time: "desc"
@@ -52,6 +53,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
       time: new Date(parseInt(kick.time.toString())),
       console: kick.banned_by_uuid === siteConfig.console.uuid,
       active: typeof kick.active === "boolean" ? kick.active : kick.active === "1",
+      server: kick.server_origin ?? "-",
       name
     }
   }));

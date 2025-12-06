@@ -30,16 +30,22 @@ export const KicksBodyData = async ({
     <TableBody>
       {kicks.map((kick) => (
         <TableRow key={kick.id}>
+          <TableCell className="text-center w-16 !px-1">
+            {kick.id}
+          </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="player" name={kick.name!} uuid={kick.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="staff" name={kick.banned_by_name!} uuid={kick.banned_by_uuid!} console={kick.console} />
           </TableCell>
-          <TableCell className="w-[442px]">
+          <TableCell className="text-center w-32">
+            {kick.server ?? "-"}
+          </TableCell>
+          <TableCell className="w-[260px]">
             {kick.reason}
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[150px]">
             <RelativeTimeTooltip lang={language} time={kick.time} />
           </TableCell>
           <TableCell className="!pl-0 !pr-3">

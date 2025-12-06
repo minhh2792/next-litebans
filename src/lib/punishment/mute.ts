@@ -35,6 +35,7 @@ const getMutes = async (page: number, player?: string, staff?: string) => {
       time: true,
       until: true,
       active: true,
+      server_origin: true,
       removed_by_uuid: true,
       removed_by_name: true,
       removed_by_reason: true,
@@ -73,6 +74,7 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
       console: mute.banned_by_uuid === siteConfig.console.uuid,
       permanent: until == dictionary.table.permanent,
       active,
+      server: mute.server_origin ?? "-",
       until,
       name
     }

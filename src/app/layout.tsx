@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import { Inter } from "next/font/google";
+import { Lexend_Deca } from "next/font/google";
 
 import { siteConfig } from "@config/site";
 import { language } from "@/lib/language/dictionaries";
@@ -10,7 +10,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SiteHeader } from "@/components/layout/header/site-header";
 
-const inter = Inter({ subsets: ["latin"] });
+const lexend = Lexend_Deca({ subsets: ["latin"] });
 
 export async function generateMetadata() {
   
@@ -46,7 +46,7 @@ export default async function RootLayout({
         <head>
           <link rel="shortcut icon" href={siteConfig.favicon} />
         </head>
-        <body className={inter.className}>
+        <body className={lexend.className}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

@@ -21,12 +21,14 @@ interface HistoryTableProps {
   page: number;
   player?: string;
   staff?: string;
+  idOnEdge?: boolean;
 }
 
 export const HistoryTable = async ({ 
   page,
   player,
-  staff
+  staff,
+  idOnEdge = false
 }: HistoryTableProps) => {
 
   const { lang, dictionary } = await language();
@@ -42,17 +44,24 @@ export const HistoryTable = async ({
         <Table>
           <TableHeader>
             <TableRow className="bg-muted/50">
-              <TableHead className="text-center">{localDictionary.table.heads.type}</TableHead>
+              {idOnEdge && (
+                <TableHead className="text-center w-16 !px-1">{dictionary.words.id ?? "ID"}</TableHead>
+              )}
+              <TableHead className="text-center w-28 px-2">{localDictionary.table.heads.type}</TableHead>
+              {!idOnEdge && (
+                <TableHead className="text-center w-16 !px-1">{dictionary.words.id ?? "ID"}</TableHead>
+              )}
               <TableHead className="text-center !px-1">{localDictionary.table.heads.player}</TableHead>
               <TableHead className="text-center !px-1">{localDictionary.table.heads.by}</TableHead>
-              <TableHead>{localDictionary.table.heads.reason}</TableHead>
-              <TableHead>{localDictionary.table.heads.date}</TableHead>
-              <TableHead>{localDictionary.table.heads.expires}</TableHead>
+              <TableHead className="text-center w-28 !px-1">{localDictionary.table.heads.server}</TableHead>
+              <TableHead className="w-[170px]">{localDictionary.table.heads.reason}</TableHead>
+              <TableHead className="w-[150px]">{localDictionary.table.heads.date}</TableHead>
+              <TableHead className="w-[200px]">{localDictionary.table.heads.expires}</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>
-          <Suspense fallback={<HistoryBodySkeleton />}>
-            <HistoryBodyData language={lang} dictionary={dictionary} page={page} player={player} staff={staff} />
+          <Suspense fallback={<HistoryBodySkeleton idOnEdge={idOnEdge} />}>
+            <HistoryBodyData language={lang} dictionary={dictionary} page={page} player={player} staff={staff} idOnEdge={idOnEdge} />
           </Suspense>
         </Table>
         <ScrollBar className="md:hidden" orientation="horizontal" />

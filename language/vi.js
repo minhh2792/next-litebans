@@ -30,6 +30,7 @@ const language = {
     reason: "Lý do",
     date: "Ngày",
     expires: "Hết hạn",
+    id: "ID",
     originServer: "Server xử lý",
     notified: "Đã thông báo",
   },
@@ -48,6 +49,7 @@ const language = {
           type: "Loại",
           player: "Người chơi",
           by: "Xử lý bởi",
+          server: "Server xử lý",
           reason: "Lý do",
           date: "Ngày",
           expires: "Hết hạn"
@@ -71,6 +73,7 @@ const language = {
         heads: {
           player: "Người chơi",
           by: "Khoá bởi",
+          server: "Server xử lý",
           reason: "Lý do",
           date: "Ngày",
           expires: "Hết hạn"
@@ -103,6 +106,7 @@ const language = {
         heads: {
           player: "Người chơi",
           by: "Cấm chat bởi",
+          server: "Server xử lý",
           reason: "Lý do",
           date: "Ngày",
           expires: "Hết hạn"
@@ -135,6 +139,7 @@ const language = {
         heads: {
           player: "Người chơi",
           by: "Cảnh cáo bởi",
+          server: "Server xử lý",
           reason: "Lý do",
           date: "Ngày",
           status: "Trạng thái",
@@ -159,6 +164,7 @@ const language = {
         heads: {
           player: "Người chơi",
           by: "Kick bởi",
+          server: "Server xử lý",
           reason: "Lý do",
           date: "Ngày"
         }

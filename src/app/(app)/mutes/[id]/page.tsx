@@ -58,6 +58,8 @@ export default async function Mute({
 
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.mutes;
+  const badgeGreen = "px-3 py-1 text-sm bg-green-600 text-white hover:bg-green-700";
+  const badgeBlue = "px-3 py-1 text-sm bg-blue-600 text-white hover:bg-blue-700";
 
   if (isNaN(parseInt(params.id))) {
     return notFound();
@@ -79,19 +81,19 @@ export default async function Mute({
         </h1>
         <div className="flex space-x-2 justify-center">
           {mute.ipban && (
-            <Badge variant="secondary">{localDictionary.info.badges.ipmute}</Badge>
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.ipmute}</Badge>
           )}
           {mute.revoked && (
-            <Badge variant="secondary">{localDictionary.info.badges.revoked}</Badge>
+            <Badge variant="secondary" className={badgeBlue}>{localDictionary.info.badges.revoked}</Badge>
           )}
           {(!mute.revoked && mute.active) && (
-            <Badge variant="secondary">{localDictionary.info.badges.active}</Badge>
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.active}</Badge>
           )}
           {(!mute.revoked && mute.status !== undefined && !mute.status) && (
-            <Badge variant="secondary">{localDictionary.info.badges.expired}</Badge>
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.expired}</Badge>
           )}
           {(mute.permanent && mute.status) && (
-            <Badge variant="secondary">{localDictionary.info.badges.permanent}</Badge>
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.permanent}</Badge>
           )}
         </div>
       </div>
@@ -106,13 +108,15 @@ export default async function Mute({
             <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
             <p><RelativeTimeTooltip lang={lang} time={mute.time}/></p>
           </div>
-          <div className="space-y-1 inline-flex flex-col">
-            <h3 className="inline-flex items-center text-lg font-medium"><PiClockCountdownBold className="mr-2"/>{dictionary.words.expires}</h3>
-            <p className="flex items-center">
-              <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
-              <RelativeTimeTooltip lang={lang} time={mute.until}/>
-            </p>
-          </div>
+          {!mute.revoked && (
+            <div className="space-y-1 inline-flex flex-col">
+              <h3 className="inline-flex items-center text-lg font-medium"><PiClockCountdownBold className="mr-2"/>{dictionary.words.expires}</h3>
+              <p className="flex items-center">
+                <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
+                <RelativeTimeTooltip lang={lang} time={mute.until}/>
+              </p>
+            </div>
+          )}
           <div className="space-y-1">
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{mute.server}</p>
@@ -120,12 +124,20 @@ export default async function Mute({
           {mute.revoked && (
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              {mute.removed_by_date instanceof Date && (
+                <p className="flex items-center">
+                  <PunishmentStatusDot
+                    dictionary={localDictionary}
+                    status={false}
+                    tooltipOverride={localDictionary.table.active.revoked}
+                    variant="revoked"
+                  />
+                  <RelativeTimeTooltip lang={lang} time={mute.removed_by_date} />
+                </p>
+              )}
               <p>{p(localDictionary.table.revoked_by, { staff: mute.removed_by_name ?? dictionary.words.staff })}</p>
               {mute.removed_by_reason && (
                 <p className="text-sm text-muted-foreground">{mute.removed_by_reason}</p>
-              )}
-              {mute.removed_by_date instanceof Date && (
-                <RelativeTimeTooltip lang={lang} time={mute.removed_by_date} />
               )}
             </div>
           )}
@@ -140,13 +152,15 @@ export default async function Mute({
             <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
             <p><RelativeTimeTooltip lang={lang} time={mute.time}/></p>
           </div>
-          <div className="space-y-1 inline-flex flex-col w-full">
-            <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiClockCountdownBold className="mr-2"/>{dictionary.words.expires}</h3>
-            <p className="flex items-center mx-auto">
-              <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
-              <RelativeTimeTooltip lang={lang} time={mute.until}/>
-            </p>
-          </div>
+          {!mute.revoked && (
+            <div className="space-y-1 inline-flex flex-col w-full">
+              <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiClockCountdownBold className="mr-2"/>{dictionary.words.expires}</h3>
+              <p className="flex items-center mx-auto">
+                <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
+                <RelativeTimeTooltip lang={lang} time={mute.until}/>
+              </p>
+            </div>
+          )}
           <div className="space-y-1">
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{mute.server}</p>
@@ -154,14 +168,20 @@ export default async function Mute({
           {mute.revoked && (
             <div className="space-y-1 inline-flex flex-col w-full">
               <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              {mute.removed_by_date instanceof Date && (
+                <p className="flex items-center mx-auto">
+                  <PunishmentStatusDot
+                    dictionary={localDictionary}
+                    status={false}
+                    tooltipOverride={localDictionary.table.active.revoked}
+                    variant="revoked"
+                  />
+                  <RelativeTimeTooltip lang={lang} time={mute.removed_by_date}/>
+                </p>
+              )}
               <p className="mx-auto">{p(localDictionary.table.revoked_by, { staff: mute.removed_by_name ?? dictionary.words.staff })}</p>
               {mute.removed_by_reason && (
                 <p className="text-xs text-muted-foreground text-center">{mute.removed_by_reason}</p>
-              )}
-              {mute.removed_by_date instanceof Date && (
-                <div className="mx-auto">
-                  <RelativeTimeTooltip lang={lang} time={mute.removed_by_date}/>
-                </div>
               )}
             </div>
           )}

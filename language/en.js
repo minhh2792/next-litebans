@@ -30,6 +30,7 @@ const language = {
     reason: "Reason",
     date: "Date",
     expires: "Expires",
+    id: "ID",
     originServer: "Origin server",
     notified: "Notified",
   },
@@ -48,6 +49,7 @@ const language = {
           type: "Type",
           player: "Player",
           by: "Punished by",
+          server: "Origin server",
           reason: "Reason",
           date: "Date",
           expires: "Expires"
@@ -71,6 +73,7 @@ const language = {
         heads: {
           player: "Player",
           by: "Banned by",
+          server: "Origin server",
           reason: "Reason",
           date: "Date",
           expires: "Expires"
@@ -103,6 +106,7 @@ const language = {
         heads: {
           player: "Player",
           by: "Muted by",
+          server: "Origin server",
           reason: "Reason",
           date: "Date",
           expires: "Expires"
@@ -135,6 +139,7 @@ const language = {
         heads: {
           player: "Player",
           by: "Warned by",
+          server: "Origin server",
           reason: "Reason",
           date: "Date",
           status: "Status",
@@ -159,6 +164,7 @@ const language = {
         heads: {
           player: "Player",
           by: "Kicked by",
+          server: "Origin server",
           reason: "Reason",
           date: "Date"
         }

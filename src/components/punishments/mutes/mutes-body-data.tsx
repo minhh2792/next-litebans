@@ -36,19 +36,25 @@ export const MutesBodyData = async ({
     <TableBody>
       {mutes.map((mute) => (
         <TableRow key={mute.id}>
+          <TableCell className="text-center w-16 !px-1">
+            {mute.id}
+          </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="player" name={mute.name!} uuid={mute.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="staff" name={mute.banned_by_name!} uuid={mute.banned_by_uuid!} console={mute.console} />
           </TableCell>
-          <TableCell className="w-[227px]">
+          <TableCell className="text-center w-32">
+            {mute.server ?? "-"}
+          </TableCell>
+          <TableCell className="w-[200px]">
             {mute.reason}
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[150px]">
             <RelativeTimeTooltip lang={language} time={mute.time} />
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[200px]">
             <div className="space-y-1">
               <p className="flex items-center">
                 <PunishmentStatusDot

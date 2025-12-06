@@ -39,16 +39,22 @@ export const WarnsBodyData = async ({
     <TableBody>
       {warns.map((warn) => (
         <TableRow key={warn.id}>
+          <TableCell className="text-center w-16 !px-1">
+            {warn.id}
+          </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="player" name={warn.name!} uuid={warn.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="staff" name={warn.banned_by_name!} uuid={warn.banned_by_uuid!} console={warn.console} />
           </TableCell>
-          <TableCell className="w-[292px]">
+          <TableCell className="text-center w-32">
+            {warn.server ?? "-"}
+          </TableCell>
+          <TableCell className="w-[200px]">
             {warn.reason}
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[150px]">
             <RelativeTimeTooltip lang={language} time={warn.time} />
           </TableCell>
           <TableCell className="w-[200px]">
@@ -74,7 +80,7 @@ export const WarnsBodyData = async ({
               )}
             </div>
           </TableCell>
-          <TableCell className="w-[150px]">
+          <TableCell className="w-28">
             {warn.warned ?
               <FaCheck className="mx-auto text-xl" />
               :

@@ -85,7 +85,7 @@ export default async function Home(searchParams: SearchParams) {
         />
       </div>
       <div className="mx-auto w-full lg:w-[1024px]">
-        <HistoryTable page={page} player={player} staff={staff} />
+        <HistoryTable page={page} player={player} staff={staff} idOnEdge />
       </div>
     </DefaultPage>
   );

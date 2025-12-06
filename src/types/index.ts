@@ -17,6 +17,7 @@ export type PunishmentListItem = {
   reason: string | null
   banned_by_uuid: string
   banned_by_name: string | null
+  server_origin?: string | null
   time: bigint | number
   until: bigint | number
   active: boolean | string

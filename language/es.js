@@ -30,6 +30,7 @@ const language = {
     reason: "Razón",
     date: "Fecha",
     expires: "Expiración",
+    id: "ID",
     originServer: "Servidor de origen",
     notified: "Notificado",
   },
@@ -48,6 +49,7 @@ const language = {
           type: "Tipo",
           player: "Jugador",
           by: "Sancionado por",
+          server: "Servidor de origen",
           reason: "Razón",
           date: "Fecha",
           expires: "Expiración"
@@ -71,6 +73,7 @@ const language = {
         heads: {
           player: "Jugador",
           by: "Baneado por",
+          server: "Servidor de origen",
           reason: "Razón",
           date: "Fecha",
           expires: "Expiración"
@@ -103,6 +106,7 @@ const language = {
         heads: {
           player: "Jugador",
           by: "Silenciado por",
+          server: "Servidor de origen",
           reason: "Razón",
           date: "Fecha",
           expires: "Expiración"
@@ -135,6 +139,7 @@ const language = {
         heads: {
           player: "Jugador",
           by: "Avisado por",
+          server: "Servidor de origen",
           reason: "Razón",
           date: "Fecha",
           status: "Estado",
@@ -159,6 +164,7 @@ const language = {
         heads: {
           player: "Jugador",
           by: "Expulsado por",
+          server: "Servidor de origen",
           reason: "Razón",
           date: "Fecha"
         }

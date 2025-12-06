@@ -19,6 +19,7 @@ interface HistoryBodyDataProps {
   page: number;
   player?: string;
   staff?: string;
+  idOnEdge?: boolean;
 }
 
 export const HistoryBodyData = async ({
@@ -26,7 +27,8 @@ export const HistoryBodyData = async ({
   dictionary,
   page,
   player,
-  staff
+  staff,
+  idOnEdge = false
 }: HistoryBodyDataProps) => {
 
   const localDictionary = dictionary.pages.history;
@@ -37,24 +39,37 @@ export const HistoryBodyData = async ({
     <TableBody>
       {punishments.map((punishment) => (
         <TableRow key={`${punishment.type}:${punishment.id}`}>
+          {idOnEdge && (
+            <TableCell className="text-center w-16 !px-1">
+              {punishment.id}
+            </TableCell>
+          )}
           <TableCell className="text-center w-24 !px-0.5">
             <Badge variant={punishment.type} className="px-1">
               {dictionary.words[`${punishment.type!}s`].singular.toUpperCase()}
             </Badge>
           </TableCell>
+          {!idOnEdge && (
+            <TableCell className="text-center w-16 !px-1">
+              {punishment.id}
+            </TableCell>
+          )}
           <TableCell className="space-y-1 w-[148px] text-center">
             <AvatarName query="player" name={punishment.name!} uuid={punishment.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-[148px] text-center">
             <AvatarName query="staff" name={punishment.banned_by_name!} uuid={punishment.banned_by_uuid!} console={punishment.console} />
           </TableCell>
-          <TableCell className="w-[180px]">
+          <TableCell className="text-center w-28">
+            {punishment.server ?? "-"}
+          </TableCell>
+          <TableCell className="w-[170px]">
             {punishment.reason}
           </TableCell>
-          <TableCell className="w-[200px]">
+          <TableCell className="w-[150px]">
             <RelativeTimeTooltip lang={language} time={punishment.time} />
           </TableCell>
-          <TableCell className="w-[205px]">
+          <TableCell className="w-[200px]">
             { (punishment.type == "ban" || punishment.type == "mute") ?
                 <div className="space-y-1">
                   <p className="flex items-center">

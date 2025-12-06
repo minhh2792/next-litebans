@@ -13,6 +13,7 @@ import { getCachedWarn as getWarn } from "@/lib/punishment/warn";
 
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
+import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   
@@ -97,12 +98,20 @@ export default async function Warn({
           {warn.revoked && (
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              {warn.removed_by_date instanceof Date && (
+                <p className="flex items-center">
+                  <PunishmentStatusDot
+                    dictionary={localDictionary}
+                    status={false}
+                    tooltipOverride={localDictionary.table.active.revoked}
+                    variant="revoked"
+                  />
+                  <RelativeTimeTooltip lang={lang} time={warn.removed_by_date} />
+                </p>
+              )}
               <p>{p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}</p>
               {warn.removed_by_reason && (
                 <p className="text-sm text-muted-foreground">{warn.removed_by_reason}</p>
-              )}
-              {warn.removed_by_date instanceof Date && (
-                <RelativeTimeTooltip lang={lang} time={warn.removed_by_date} />
               )}
             </div>
           )}
@@ -128,14 +137,20 @@ export default async function Warn({
           {warn.revoked && (
             <div className="space-y-1 inline-flex flex-col w-full">
               <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              {warn.removed_by_date instanceof Date && (
+                <p className="flex items-center mx-auto">
+                  <PunishmentStatusDot
+                    dictionary={localDictionary}
+                    status={false}
+                    tooltipOverride={localDictionary.table.active.revoked}
+                    variant="revoked"
+                  />
+                  <RelativeTimeTooltip lang={lang} time={warn.removed_by_date}/>
+                </p>
+              )}
               <p className="mx-auto">{p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}</p>
               {warn.removed_by_reason && (
                 <p className="text-xs text-muted-foreground text-center">{warn.removed_by_reason}</p>
-              )}
-              {warn.removed_by_date instanceof Date && (
-                <div className="mx-auto">
-                  <RelativeTimeTooltip lang={lang} time={warn.removed_by_date}/>
-                </div>
               )}
             </div>
           )}

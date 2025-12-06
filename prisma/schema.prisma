@@ -23,7 +23,7 @@ model litebans_bans {
   removed_by_uuid   String?  @db.VarChar(36)
   removed_by_name   String?  @db.VarChar(128)
   removed_by_reason String?  @db.VarChar(2048)
-  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  removed_by_date   DateTime? @default(now()) @db.Timestamp(0)
   time              BigInt
   until             BigInt
   template          Int      @default(255) @db.UnsignedTinyInt
@@ -78,7 +78,7 @@ model litebans_mutes {
   removed_by_uuid   String?  @db.VarChar(36)
   removed_by_name   String?  @db.VarChar(128)
   removed_by_reason String?  @db.VarChar(2048)
-  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  removed_by_date   DateTime? @default(now()) @db.Timestamp(0)
   time              BigInt
   until             BigInt
   template          Int      @default(255) @db.UnsignedTinyInt
@@ -114,7 +114,7 @@ model litebans_warnings {
   removed_by_uuid   String?  @db.VarChar(36)
   removed_by_name   String?  @db.VarChar(128)
   removed_by_reason String?  @db.VarChar(2048)
-  removed_by_date   DateTime @default(now()) @db.Timestamp(0)
+  removed_by_date   DateTime? @default(now()) @db.Timestamp(0)
   time              BigInt
   until             BigInt
   template          Int      @default(255) @db.UnsignedTinyInt

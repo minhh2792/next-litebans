@@ -36,19 +36,25 @@ export const BansBodyData = async ({
     <TableBody>
       {bans.map((ban) => (
         <TableRow key={ban.id}>
+          <TableCell className="text-center w-16 !px-1">
+            {ban.id}
+          </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="player" name={ban.name!} uuid={ban.uuid!} />
           </TableCell>
           <TableCell className="space-y-1 w-40 text-center">
             <AvatarName query="staff" name={ban.banned_by_name!} uuid={ban.banned_by_uuid!} console={ban.console} />
           </TableCell>
-          <TableCell className="w-[227px]">
+          <TableCell className="text-center w-32">
+            {ban.server ?? "-"}
+          </TableCell>
+          <TableCell className="w-[200px]">
             {ban.reason}
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[150px]">
             <RelativeTimeTooltip lang={language} time={ban.time} />
           </TableCell>
-          <TableCell className="w-[215px]">
+          <TableCell className="w-[200px]">
             <div className="space-y-1">
               <p className="flex items-center">
                 <PunishmentStatusDot

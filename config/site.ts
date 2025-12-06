@@ -4,8 +4,6 @@ export const siteConfig = {
   favicon: "/minevn.png",
   languages: {
     available: [
-      "en",
-      "es",
       "vi",
     ],
     default: "vi",
