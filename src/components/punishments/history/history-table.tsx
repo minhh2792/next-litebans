@@ -28,7 +28,7 @@ export const HistoryTable = async ({
   page,
   player,
   staff,
-  idOnEdge = false
+  idOnEdge = true
 }: HistoryTableProps) => {
 
   const { lang, dictionary } = await language();

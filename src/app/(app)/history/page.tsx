@@ -51,7 +51,7 @@ export default async function History(searchParams: SearchParams) {
       })}
       className="w-full lg:w-[1024px]"
     >
-      <HistoryTable page={page} player={player} staff={staff} />
+      <HistoryTable page={page} player={player} staff={staff} idOnEdge />
     </DefaultPage>
   );
 }

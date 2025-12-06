@@ -132,7 +132,7 @@ export default async function History({
       </div>
 
       <section className="w-full lg:w-[1024px]">
-        <HistoryTable page={page} player={player.uuid!} staff={staff} />
+        <HistoryTable page={page} player={player.uuid!} staff={staff} idOnEdge />
       </section>
     </div>
   );

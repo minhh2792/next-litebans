@@ -16,6 +16,7 @@ export const siteConfig = {
     bust: "/console-bust.webp",
   },
   defaultPlayerLookup: "CursedKiwi",
+  timeZone: "UTC",
   // When enabled, body and bust images will show a steve skin
   bedrock: {
     enabled: true,

@@ -9,19 +9,19 @@ const language = {
   words: {
     bans: {
       singular: "Khoá tài khoản",
-      plural: "Khoá tài khoản"
+      plural: "Lần khoá tài khoản"
     },
     mutes: {
       singular: "Cấm chat",
-      plural: "Cấm chat"
+      plural: "Lần cấm chat"
     },
     kicks: {
       singular: "Kick",
-      plural: "Kick"
+      plural: "Lần kick"
     },
     warns: {
       singular: "Cảnh cáo",
-      plural: "Cảnh cáo"
+      plural: "Lần cảnh cáo"
     },
     yes: "Có",
     no: "Không",

@@ -1,11 +1,4 @@
-import { getRelativeDifference, getRelativeDifferenceText } from "@/utils/date";
-
-import { 
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger
-} from "@/components/ui/tooltip";
+import { siteConfig } from "@config/site";
 
 interface RelativeTimeTooltipProps {
   lang: string
@@ -16,16 +9,18 @@ export const RelativeTimeTooltip = ({
   lang,
   time
 }: RelativeTimeTooltipProps) => (
-  <TooltipProvider delayDuration={50}>
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <span className="cursor-default">{time.toLocaleString(lang)}</span>
-      </TooltipTrigger>
-      <TooltipContent className={time instanceof Date ? "" : "hidden"}>
-        {time instanceof Date && (
-          <p>{getRelativeDifferenceText(lang, getRelativeDifference(time))}</p>
-        )}
-      </TooltipContent>
-    </Tooltip>
-  </TooltipProvider>
+  <span className="cursor-default">
+    {time instanceof Date
+      ? new Intl.DateTimeFormat(lang, {
+          timeZone: siteConfig.timeZone,
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        }).format(time)
+      : time}
+  </span>
 )
