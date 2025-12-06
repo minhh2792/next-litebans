@@ -53,13 +53,13 @@ const getPlayerName = async (uuid: string) => {
 
 const getPunishments = async (page: number, player?: string, staff?: string) => {
   const query = Prisma.sql`
-  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, 'ban' AS type FROM litebans_bans ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
+  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, server_scope, 'ban' AS type FROM litebans_bans ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
   UNION ALL 
-  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, 'mute' AS type FROM litebans_mutes ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
+  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, server_scope, 'mute' AS type FROM litebans_mutes ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
   UNION ALL 
-  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, 'warn' AS type FROM litebans_warnings ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
+  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, removed_by_uuid, removed_by_name, removed_by_reason, removed_by_date, server_origin, server_scope, 'warn' AS type FROM litebans_warnings ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
   UNION ALL 
-  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, NULL as removed_by_uuid, NULL as removed_by_name, NULL as removed_by_reason, NULL as removed_by_date, server_origin, 'kick' AS type FROM litebans_kicks ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
+  SELECT id, uuid, banned_by_name, banned_by_uuid, reason, time, until, active, NULL as removed_by_uuid, NULL as removed_by_name, NULL as removed_by_reason, NULL as removed_by_date, server_origin, server_scope, 'kick' AS type FROM litebans_kicks ${player || staff ? Prisma.sql`WHERE ` : Prisma.sql``}${player ? Prisma.sql` uuid = ${player} ` : Prisma.sql``} ${player && staff ? Prisma.sql`AND` : Prisma.sql``} ${staff ? Prisma.sql` banned_by_uuid = ${staff}` : Prisma.sql``}
   ORDER BY time DESC
   LIMIT 10
   OFFSET ${(page - 1) * 10}
@@ -99,6 +99,7 @@ const sanitizePunishments = async (dictionary: Dictionary, punishments: Punishme
       statusTooltip,
       status,
       server: punishment.server_origin ?? "-",
+      serverScope: punishment.server_scope ?? "-",
       until,
       name
     }

@@ -36,6 +36,7 @@ const getMutes = async (page: number, player?: string, staff?: string) => {
       until: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       removed_by_uuid: true,
       removed_by_name: true,
       removed_by_reason: true,
@@ -75,6 +76,7 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
       permanent: until == dictionary.table.permanent,
       active,
       server: mute.server_origin ?? "-",
+      serverScope: mute.server_scope ?? "-",
       until,
       name
     }
@@ -99,6 +101,7 @@ const getMute = async (id: number, dictionary: Dictionary) => {
       ipban: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       removed_by_uuid: true,
       removed_by_name: true,
       removed_by_reason: true,
@@ -115,7 +118,8 @@ const getMute = async (id: number, dictionary: Dictionary) => {
   return {
     ...sanitized,
     ipban: mute.ipban,
-    server: mute.server_origin
+    server: mute.server_origin,
+    serverScope: mute.server_scope ?? "-"
   }
 }
 

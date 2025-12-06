@@ -32,6 +32,8 @@ const language = {
     expires: "Hết hạn",
     id: "ID",
     originServer: "Server xử lý",
+    serverScope: "Server áp dụng",
+    serverScopeAll: "Toàn bộ MineVN",
     notified: "Đã thông báo",
   },
   pages: {

@@ -34,6 +34,7 @@ const getWarns = async (page: number, player?: string, staff?: string) => {
       until: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       warned: true,
       removed_by_uuid: true,
       removed_by_name: true,
@@ -67,6 +68,7 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
       revoked,
       until: untilValue,
       server: warn.server_origin ?? "-",
+      serverScope: warn.server_scope ?? "-",
       name
     }
   }));
@@ -89,6 +91,7 @@ const getWarn = async (id: number) => {
       until: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       warned: true,
       removed_by_uuid: true,
       removed_by_name: true,
@@ -105,7 +108,8 @@ const getWarn = async (id: number) => {
 
   return {
     ...sanitized,
-    server: warn.server_origin
+    server: warn.server_origin,
+    serverScope: warn.server_scope ?? "-"
   }
 }
 

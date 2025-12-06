@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { IoCalendar } from "react-icons/io5";
 import { PiProhibitBold, PiScrollFill } from "react-icons/pi";
-import { FaEarthEurope } from "react-icons/fa6";
+import { FaEarthEurope, FaServer } from "react-icons/fa6";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 
 import { formatDate } from "@/lib/date";
@@ -56,6 +56,7 @@ export default async function Warn({
 
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.warns;
+  const formatScope = (scope?: string | null) => scope === "*" ? (dictionary.words.serverScopeAll ?? scope) : (scope ?? "-");
 
   if (isNaN(parseInt(params.id))) {
     return notFound();
@@ -95,6 +96,10 @@ export default async function Warn({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{warn.server}</p>
           </div>
+          <div className="space-y-1">
+            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
+            <p>{formatScope(warn.serverScope)}</p>
+          </div>
           {warn.revoked && (
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
@@ -133,6 +138,10 @@ export default async function Warn({
           <div className="space-y-1">
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{warn.server}</p>
+          </div>
+          <div className="space-y-1">
+            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
+            <p>{formatScope(warn.serverScope)}</p>
           </div>
           {warn.revoked && (
             <div className="space-y-1 inline-flex flex-col w-full">

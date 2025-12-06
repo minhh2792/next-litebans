@@ -36,6 +36,7 @@ const getBans = async (page: number, player?: string, staff?: string) => {
       until: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       removed_by_uuid: true,
       removed_by_name: true,
       removed_by_reason: true,
@@ -75,6 +76,7 @@ const sanitizeBans = async (dictionary: Dictionary, bans: PunishmentListItem[]) 
       permanent: until == dictionary.table.permanent,
       active,
       server: ban.server_origin ?? "-",
+      serverScope: ban.server_scope ?? "-",
       until,
       name,
     }
@@ -99,6 +101,7 @@ const getBan = async (id: number, dictionary: Dictionary) => {
       ipban: true,
       active: true,
       server_origin: true,
+      server_scope: true,
       removed_by_uuid: true,
       removed_by_name: true,
       removed_by_reason: true,
@@ -115,7 +118,8 @@ const getBan = async (id: number, dictionary: Dictionary) => {
   return {
     ...sanitized,
     ipban: ban.ipban,
-    server: ban.server_origin
+    server: ban.server_origin,
+    serverScope: ban.server_scope ?? "-"
   }
 }
 

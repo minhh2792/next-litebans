@@ -19,7 +19,7 @@ export const siteConfig = {
   timeZone: "UTC",
   // When enabled, body and bust images will show a steve skin
   bedrock: {
-    enabled: true,
+    enabled: false,
     prefix: "BP_",
   },
   openGraph: {
@@ -29,13 +29,7 @@ export const siteConfig = {
         // Placeholders: {total}, {bans}, {mutes}, {kicks}, {warns}
         description: `
         Lịch sử xử lý vi phạm tại MineVN.
-
-        Đã xử lý: {total}
-
-          🚫 Khoá tài khoản: {bans}
-          🔇 Cấm chat: {mutes}
-          ⚠️ Cảnh cáo: {warns}
-          ❌ Kick: {kicks}
+        Đã xử lý: {total} vi phạm
         `
       },
       history: {
@@ -64,47 +58,43 @@ export const siteConfig = {
         bans: {
           description: `
           Khoá tài khoản của {name}.
-
-          Tổng số khoá tài khoản: {total}
+          Tổng số lần khoá tài khoản: {total}
           `,
         },
         mutes: {
           description: `
           Cấm chat của {name}.
-
-          Tổng số Cấm chat: {total}
+          Tổng số lần cấm chat: {total}
           `,
         },
         warns: {
           description: `
           Cảnh cáo của {name}.
-
-          Tổng số cảnh cáo: {total}
+          Tổng số lần cảnh cáo: {total}
           `,
         },
         kicks: {
           description: `
           Kick của {name}.
-
-          Tổng số kick: {total}
+          Tổng số lần kick: {total}
           `,
         },
       },
       bans: {
         // Placeholders: {total}
-        description: "Tổng số khoá tài khoản: {total}"
+        description: "Tổng số lần khoá tài khoản: {total}"
       },
       mutes: {
         // Placeholders: {total}
-        description: "Tổng số cấm chat: {total}"
+        description: "Tổng số lần cấm chat: {total}"
       },
       warns: {
         // Placeholders: {total}
-        description: "Tổng số cảnh cáo: {total}"
+        description: "Tổng số lần cảnh cáo: {total}"
       },
       kicks: {
         // Placeholders: {total}
-        description: "Tổng số kick: {total}"
+        description: "Tổng số lần kick: {total}"
       },
     },
     punishments: {

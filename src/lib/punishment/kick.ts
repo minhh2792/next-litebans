@@ -33,7 +33,8 @@ const getKicks = async (page: number, player?: string, staff?: string) => {
       time: true,
       until: true,
       active: true,
-      server_origin: true
+      server_origin: true,
+      server_scope: true
     },
     orderBy: {
       time: "desc"
@@ -54,6 +55,7 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
       console: kick.banned_by_uuid === siteConfig.console.uuid,
       active: typeof kick.active === "boolean" ? kick.active : kick.active === "1",
       server: kick.server_origin ?? "-",
+      serverScope: kick.server_scope ?? "-",
       name
     }
   }));
@@ -76,6 +78,7 @@ const getKick = async (id: number) => {
       until: true,
       active: true,
       server_origin: true,
+      server_scope: true,
     }
   });
 
@@ -87,7 +90,8 @@ const getKick = async (id: number) => {
 
   return {
     ...sanitized,
-    server: kick.server_origin
+    server: kick.server_origin,
+    serverScope: kick.server_scope ?? "-"
   }
 }
 

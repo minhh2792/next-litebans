@@ -32,6 +32,8 @@ const language = {
     expires: "Expiración",
     id: "ID",
     originServer: "Servidor de origen",
+    serverScope: "Ámbito del servidor",
+    serverScopeAll: "Todos los servidores",
     notified: "Notificado",
   },
   pages: {

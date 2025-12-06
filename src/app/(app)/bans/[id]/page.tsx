@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 
 import { IoCalendar } from "react-icons/io5";
 import { PiProhibitBold, PiScrollFill } from "react-icons/pi";
-import { FaEarthEurope } from "react-icons/fa6";
+import { FaEarthEurope, FaServer } from "react-icons/fa6";
 import { PiClockCountdownBold } from "react-icons/pi";
 
 import { siteConfig } from "@config/site";
@@ -59,6 +59,7 @@ export default async function Ban({
   const localDictionary = dictionary.pages.bans;
   const badgeGreen = "px-3 py-1 text-sm bg-green-600 text-white hover:bg-green-700";
   const badgeBlue = "px-3 py-1 text-sm bg-blue-600 text-white hover:bg-blue-700";
+  const formatScope = (scope?: string | null) => scope === "*" ? (dictionary.words.serverScopeAll ?? scope) : (scope ?? "-");
 
   if (isNaN(parseInt(params.id))) {
     return notFound();
@@ -120,6 +121,10 @@ export default async function Ban({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{ban.server}</p>
           </div>
+          <div className="space-y-1">
+            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
+            <p>{formatScope(ban.serverScope)}</p>
+          </div>
           {ban.revoked && (
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
@@ -163,6 +168,10 @@ export default async function Ban({
           <div className="space-y-1">
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{ban.server}</p>
+          </div>
+          <div className="space-y-1">
+            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
+            <p>{formatScope(ban.serverScope)}</p>
           </div>
           {ban.revoked && (
             <div className="space-y-1 inline-flex flex-col w-full">
