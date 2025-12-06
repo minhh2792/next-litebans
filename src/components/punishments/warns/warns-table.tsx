@@ -49,7 +49,6 @@ export const WarnsTable = async ({
               <TableHead className="w-[200px]">{localDictionary.table.heads.reason}</TableHead>
               <TableHead className="w-[150px]">{localDictionary.table.heads.date}</TableHead>
               <TableHead className="w-[200px]">{localDictionary.table.heads.status}</TableHead>
-              <TableHead className="text-center w-28">{localDictionary.table.heads.notified}</TableHead>
               <TableHead></TableHead>
             </TableRow>
           </TableHeader>

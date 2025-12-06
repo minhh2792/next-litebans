@@ -80,13 +80,6 @@ export const WarnsBodyData = async ({
               )}
             </div>
           </TableCell>
-          <TableCell className="w-28">
-            {warn.warned ?
-              <FaCheck className="mx-auto text-xl" />
-              :
-              <FaTimes className="mx-auto text-lg" />
-            }
-          </TableCell>
           <TableCell className="!pl-0 !pr-3">
             <PunishmentInfoButton type="warn" id={warn.id} />
           </TableCell>
