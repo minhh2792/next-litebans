@@ -155,7 +155,12 @@ const language = {
         revoked_by: "Unwarned by {staff}"
       },
       info: {
-        title: "Warn #{id}"
+        title: "Warn #{id}",
+        badges: {
+          active: "Active",
+          revoked: "Revoked",
+          expired: "Expired"
+        }
       }
     },
     kicks: {

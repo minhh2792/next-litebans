@@ -155,7 +155,12 @@ const language = {
         revoked_by: "Gỡ cảnh cáo bởi {staff}"
       },
       info: {
-        title: "Cảnh cáo #{id}"
+        title: "Cảnh cáo #{id}",
+        badges: {
+          active: "Đang hiệu lực",
+          revoked: "Đã gỡ cảnh cáo",
+          expired: "Đã hết hạn"
+        }
       }
     },
     kicks: {

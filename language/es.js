@@ -154,9 +154,13 @@ const language = {
         },
         revoked_by: "Aviso revocado por {staff}"
       },
-      info: {
-        title: "Aviso #{id}"
-      }
+        info: {
+          title: "Aviso #{id}",
+          badges: {
+            active: "Activa",
+            revoked: "Revocada",
+            expired: "Expirada"
+          }
     },
     kicks: {
       title: "Expulsiones",

@@ -14,6 +14,7 @@ import { getCachedWarn as getWarn } from "@/lib/punishment/warn";
 import { PunishmentInfoCard } from "@/components/info/punishment-info-card";
 import { RelativeTimeTooltip } from "@/components/punishments/relative-time-tooltip";
 import { PunishmentStatusDot } from "@/components/punishments/punishment-status-dot";
+import { Badge } from "@/components/ui/badge";
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
   
@@ -56,6 +57,8 @@ export default async function Warn({
 
   const { lang, dictionary } = await language();
   const localDictionary = dictionary.pages.warns;
+  const badgeGreen = "px-3 py-1 text-sm bg-green-600 text-white hover:bg-green-700";
+  const badgeBlue = "px-3 py-1 text-sm bg-blue-600 text-white hover:bg-blue-700";
   const formatScope = (scope?: string | null) => scope === "*" ? (dictionary.words.serverScopeAll ?? scope) : (scope ?? "-");
 
   if (isNaN(parseInt(params.id))) {
@@ -76,6 +79,17 @@ export default async function Warn({
             id: params.id
           })}
         </h1>
+        <div className="flex space-x-2 justify-center">
+          {warn.revoked && (
+            <Badge variant="secondary" className={badgeBlue}>{localDictionary.info.badges.revoked}</Badge>
+          )}
+          {!warn.revoked && warn.active && (
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.active}</Badge>
+          )}
+          {!warn.revoked && warn.active === false && (
+            <Badge variant="secondary" className={badgeGreen}>{localDictionary.info.badges.expired}</Badge>
+          )}
+        </div>
       </div>
 
       <section className="space-y-4 text-center md:text-left">
