@@ -1,5 +1,5 @@
 export const siteConfig = {
-  title: "MineVN Puinishments",
+  title: "MineVN Punishments",
   logo: "/minevn.png",
   favicon: "/minevn.png",
   languages: {
