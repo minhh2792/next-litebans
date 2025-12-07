@@ -90,10 +90,6 @@ export default async function Kick({
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{kick.server}</p>
           </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
-            <p>{formatScope(kick.serverScope)}</p>
-          </div>
         </PunishmentInfoCard>
 
         <div className="block md:hidden order-3 mx-auto space-y-4 w-[350px]">
@@ -108,10 +104,6 @@ export default async function Kick({
           <div className="space-y-1">
             <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
             <p>{kick.server}</p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
-            <p>{formatScope(kick.serverScope)}</p>
           </div>
         </div>
       </section>
