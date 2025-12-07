@@ -7,6 +7,7 @@ import { db } from "../db";
 import { getPlayerName } from "./punishment";
 import { Dictionary } from "../language/types";
 import p from "../language/utils/parse";
+import { stripColorCodes } from "../utils";
 
 const getMuteCount = async (player?: string, staff?: string) => {
   const count = await db.litebans_mutes.count({
@@ -60,11 +61,15 @@ const sanitizeMutes = async (dictionary: Dictionary, mutes: PunishmentListItem[]
     const active = typeof mute.active === "boolean" ? mute.active : mute.active === "1";
     const removalFallbackDate = removalDate ?? new Date(parseInt(mute.time.toString()));
     const until = revoked ? removalFallbackDate : (mute.until.toString() === "0" ? dictionary.table.permanent : new Date(parseInt(mute.until.toString())));
+    const reason = stripColorCodes(mute.reason ?? "");
+    const removedReason = stripColorCodes(mute.removed_by_reason ?? "");
     return {
       ...mute,
       id: mute.id.toString(),
       time: new Date(parseInt(mute.time.toString())),
+      reason,
       removed_by_date: removalDate,
+      removed_by_reason: removedReason || undefined,
       revoked,
       statusTooltip: revoked && mute.removed_by_name ? p(dictionary.table.active.revoked, { staff: mute.removed_by_name }) :
                      revoked ? dictionary.table.active.revoked :

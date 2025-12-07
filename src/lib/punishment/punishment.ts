@@ -5,6 +5,7 @@ import { PunishmentListItem } from "@/types";
 import { db } from "../db";
 import { Dictionary } from "../language/types";
 import p from "../language/utils/parse";
+import { stripColorCodes } from "../utils";
 
 const getPunishmentCount = async (player?: string, staff?: string) => {
   const bans = await db.litebans_bans.count({
@@ -89,6 +90,8 @@ const sanitizePunishments = async (dictionary: Dictionary, punishments: Punishme
     const statusTooltip = revoked && punishment.removed_by_name ? p(dictionary.table.active.revoked, { staff: punishment.removed_by_name }) :
                           revoked ? dictionary.table.active.revoked :
                           undefined;
+    const reason = stripColorCodes(punishment.reason ?? "");
+    const removedReason = stripColorCodes(punishment.removed_by_reason ?? "");
     return {
       ...punishment,
       id: punishment.id.toString(),
@@ -96,6 +99,8 @@ const sanitizePunishments = async (dictionary: Dictionary, punishments: Punishme
       console: punishment.banned_by_uuid === siteConfig.console.uuid,
       removed_by_date: removalDate,
       revoked,
+      reason,
+      removed_by_reason: removedReason || undefined,
       statusTooltip,
       status,
       server: punishment.server_origin ?? "-",

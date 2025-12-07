@@ -5,6 +5,7 @@ import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
 import { getPlayerName } from "./punishment";
+import { stripColorCodes } from "../utils";
 
 const getWarnCount = async (player?: string, staff?: string) => {
   const count = await db.litebans_warnings.count({
@@ -57,14 +58,18 @@ const sanitizeWarns = async (warns: (PunishmentListItem & { warned: boolean | st
     const removalDate = revoked && warn.removed_by_date ? new Date(warn.removed_by_date) : undefined;
     const untilValue = revoked ? removalDate : (warn.until && warn.until.toString() !== "0" ? new Date(parseInt(warn.until.toString())) : undefined);
     const active = typeof warn.active === "boolean" ? warn.active : warn.active === "1";
+    const reason = stripColorCodes(warn.reason ?? "");
+    const removedReason = stripColorCodes(warn.removed_by_reason ?? "");
     return {
       ...warn,
       id: warn.id.toString(),
       time: new Date(parseInt(warn.time.toString())),
       console: warn.banned_by_uuid === siteConfig.console.uuid,
       active,
+      reason,
       warned: typeof warn.warned === "boolean" ? warn.warned : warn.warned === "1",
       removed_by_date: removalDate,
+      removed_by_reason: removedReason || undefined,
       revoked,
       until: untilValue,
       server: warn.server_origin ?? "-",

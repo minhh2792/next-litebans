@@ -5,6 +5,7 @@ import { PunishmentListItem } from "@/types";
 
 import { db } from "../db";
 import { getPlayerName } from "./punishment";
+import { stripColorCodes } from "../utils";
 
 const getKickCount = async (player?: string, staff?: string) => {
   const count = await db.litebans_kicks.count({
@@ -48,10 +49,12 @@ const sanitizeKicks = async (kicks: PunishmentListItem[]) => {
 
   const sanitized = await Promise.all(kicks.map(async (kick) => {
     const name = await getPlayerName(kick.uuid!);
+    const reason = stripColorCodes(kick.reason ?? "");
     return {
       ...kick,
       id: kick.id.toString(),
       time: new Date(parseInt(kick.time.toString())),
+      reason,
       console: kick.banned_by_uuid === siteConfig.console.uuid,
       active: typeof kick.active === "boolean" ? kick.active : kick.active === "1",
       server: kick.server_origin ?? "-",
