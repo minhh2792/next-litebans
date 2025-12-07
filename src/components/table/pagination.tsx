@@ -11,7 +11,9 @@ import {
   PaginationItem, 
   PaginationLink, 
   PaginationNext, 
-  PaginationPrevious 
+  PaginationPrevious,
+  PaginationFirst,
+  PaginationLast
 } from "@/components/ui/pagination";
 
 interface TablePaginationProps {
@@ -53,57 +55,63 @@ export const TablePagination = ({
 
   if (totalPages <= 1 ) return null;
 
-  const leftNumber = actualPage == 1 || totalPages == 2 ? 1 : actualPage == totalPages ? totalPages - 2 : actualPage - 1;
+  const maxPagesToShow = 10;
+  let startPage = Math.max(1, actualPage - Math.floor(maxPagesToShow / 2));
+  let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+  if (endPage - startPage + 1 < maxPagesToShow) {
+    startPage = Math.max(1, endPage - maxPagesToShow + 1);
+  }
+
+  const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 
   return (
     <Pagination className={className}>
       <PaginationContent>
         <PaginationItem>
-          <PaginationPrevious 
-            text={dictionary.previous}
+          <PaginationFirst
             className={actualPage <= 1 ? "hover:!cursor-default" : ""}
-            disabled={actualPage == 1}
-            href={actualPage == 1 ? undefined : `${pathname}?${createQueryString(totalPages == 2 ? 1 : actualPage - 1)}`} 
-            scroll={actualPage == 1 ? undefined : false}
+            disabled={actualPage <= 1}
+            href={actualPage <= 1 ? undefined : `${pathname}?${createQueryString(1)}`}
+            scroll={actualPage <= 1 ? undefined : false}
           />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink 
-            href={`${pathname}?${createQueryString(leftNumber)}`} 
-            isActive={actualPage == 1}
-            scroll={false}
-          >
-            {leftNumber}
-          </PaginationLink>
+          <PaginationPrevious 
+            text={dictionary.previous}
+            className={actualPage <= 1 ? "hover:!cursor-default" : ""}
+            disabled={actualPage <= 1}
+            href={actualPage <= 1 ? undefined : `${pathname}?${createQueryString(actualPage - 1)}`} 
+            scroll={actualPage <= 1 ? undefined : false}
+          />
         </PaginationItem>
-        { totalPages > 1 &&
-          <PaginationItem>
+        
+        {pages.map((page) => (
+          <PaginationItem key={page}>
             <PaginationLink 
-              href={`${pathname}?${createQueryString(leftNumber + 1)}`} 
-              isActive={actualPage == leftNumber + 1}
+              href={`${pathname}?${createQueryString(page)}`} 
+              isActive={actualPage === page}
               scroll={false}
             >
-              {leftNumber + 1}
+              {page}
             </PaginationLink>
           </PaginationItem>
-        }
-        { totalPages > 2 &&
-          <PaginationItem>
-            <PaginationLink 
-              href={`${pathname}?${createQueryString(leftNumber + 2)}`} 
-              isActive={actualPage == leftNumber + 2}
-              scroll={false}
-            >
-              {leftNumber + 2}
-            </PaginationLink>
-          </PaginationItem>
-        }
+        ))}
+
         <PaginationItem>
           <PaginationNext 
             text={dictionary.next}
             className={actualPage >= totalPages ? "hover:!cursor-default" : "" }
             disabled={actualPage >= totalPages}
-            href={actualPage >= totalPages ? undefined : `${pathname}?${createQueryString(totalPages == 2 ? 2 : actualPage + 1)}`} 
+            href={actualPage >= totalPages ? undefined : `${pathname}?${createQueryString(actualPage + 1)}`} 
+            scroll={actualPage >= totalPages ? undefined : false}
+          />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLast
+            className={actualPage >= totalPages ? "hover:!cursor-default" : "" }
+            disabled={actualPage >= totalPages}
+            href={actualPage >= totalPages ? undefined : `${pathname}?${createQueryString(totalPages)}`}
             scroll={actualPage >= totalPages ? undefined : false}
           />
         </PaginationItem>
