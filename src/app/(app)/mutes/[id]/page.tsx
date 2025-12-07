@@ -110,9 +110,9 @@ export default async function Mute({
             <p><RelativeTimeTooltip lang={lang} time={mute.time}/></p>
           </div>
           {!mute.revoked && (
-            <div className="space-y-1 inline-flex flex-col">
+            <div className="space-y-1 flex flex-col items-center sm:items-start">
               <h3 className="inline-flex items-center text-lg font-medium"><PiClockCountdownBold className="mr-2 text-amber-500"/>{dictionary.words.expires}</h3>
-              <p className="flex items-center">
+              <p className="flex items-center gap-2 sm:justify-start justify-center">
                 <PunishmentStatusDot dictionary={localDictionary} status={mute.status} />
                 <RelativeTimeTooltip lang={lang} time={mute.until}/>
               </p>
@@ -130,7 +130,7 @@ export default async function Mute({
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2 text-red-500"/>{localDictionary.table.active.revoked}</h3>
               {mute.removed_by_date instanceof Date && (
-                <p className="flex items-center">
+                <p className="flex items-center justify-center sm:justify-start gap-2">
                   <PunishmentStatusDot
                     dictionary={localDictionary}
                     status={false}

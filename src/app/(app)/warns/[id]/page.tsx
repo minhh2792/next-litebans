@@ -118,7 +118,7 @@ export default async function Warn({
             <div className="space-y-1">
               <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2 text-red-500"/>{localDictionary.table.active.revoked}</h3>
               {warn.removed_by_date instanceof Date && (
-                <p className="flex items-center">
+                <p className="flex items-center justify-center sm:justify-start gap-2">
                   <PunishmentStatusDot
                     dictionary={localDictionary}
                     status={false}
