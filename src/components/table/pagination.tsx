@@ -55,7 +55,7 @@ export const TablePagination = ({
 
   if (totalPages <= 1 ) return null;
 
-  const maxPagesToShow = 10;
+  const maxPagesToShow = 5;
   let startPage = Math.max(1, actualPage - Math.floor(maxPagesToShow / 2));
   let endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
 
