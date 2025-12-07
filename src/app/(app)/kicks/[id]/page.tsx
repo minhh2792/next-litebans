@@ -79,33 +79,19 @@ export default async function Kick({
       <section className="space-y-4 text-center md:text-left">
         <PunishmentInfoCard punishment={kick}>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2"/>{dictionary.words.reason}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2 text-rose-500"/>{dictionary.words.reason}</h3>
             <p>{kick.reason}</p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2 text-sky-500"/>{dictionary.words.date}</h3>
             <p><RelativeTimeTooltip lang={lang} time={kick.time}/></p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2 text-emerald-500"/>{dictionary.words.originServer}</h3>
             <p>{kick.server}</p>
           </div>
         </PunishmentInfoCard>
 
-        <div className="block md:hidden order-3 mx-auto space-y-4 w-[350px]">
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2"/>{dictionary.words.reason}</h3>
-            <p>{kick.reason}</p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
-            <p><RelativeTimeTooltip lang={lang} time={kick.time}/></p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
-            <p>{kick.server}</p>
-          </div>
-        </div>
       </section>
     </div>
   )

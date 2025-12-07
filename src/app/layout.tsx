@@ -49,8 +49,8 @@ export default async function RootLayout({
         <body className={lexend.className}>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="mocha"
+            enableSystem={false}
             disableTransitionOnChange
           >
             <div vaul-drawer-wrapper="" className="h-full">

@@ -1,7 +1,7 @@
 "use client"
  
 import * as React from "react"
-import { Laptop, Moon, Sun } from "lucide-react"
+import { Coffee, Palette, Snowflake, SunMedium, IceCream } from "lucide-react"
 import { useTheme } from "next-themes"
  
 import { Button } from "@/components/ui/button"
@@ -14,29 +14,40 @@ import {
  
 export const ThemeToggle = () => {
   const { setTheme } = useTheme()
+
+  const themes = [
+    { value: "latte", label: "Latte", icon: SunMedium, swatch: "#7287fd" },
+    { value: "frappe", label: "Frappe", icon: IceCream, swatch: "#babbf1" },
+    { value: "macchiato", label: "Macchiato", icon: Snowflake, swatch: "#b7bdf8" },
+    { value: "mocha", label: "Mocha", icon: Coffee, swatch: "#b4befe" },
+  ]
  
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span className="sr-only">Toggle theme</span>
+        <Button variant="ghost" size="icon" className="relative">
+          <Palette className="h-[1.2rem] w-[1.2rem]" aria-hidden />
+          <span className="sr-only">Chọn theme Catppuccin</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")} className="gap-2">
-          <Sun className="h-4 w-4" aria-hidden />
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")} className="gap-2">
-          <Moon className="h-4 w-4" aria-hidden />
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")} className="gap-2">
-          <Laptop className="h-4 w-4" aria-hidden />
-          System
-        </DropdownMenuItem>
+        {themes.map(({ value, label, icon: Icon, swatch }) => (
+          <DropdownMenuItem
+            key={value}
+            onClick={() => setTheme(value)}
+            className="gap-2"
+          >
+            <Icon className="h-4 w-4" aria-hidden />
+            <div className="flex items-center gap-2">
+              <span
+                className="h-3 w-3 rounded-full border border-border"
+                style={{ backgroundColor: swatch }}
+                aria-hidden
+              />
+              <span>{label}</span>
+            </div>
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   )

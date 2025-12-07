@@ -95,28 +95,28 @@ export default async function Warn({
       <section className="space-y-4 text-center md:text-left">
         <PunishmentInfoCard punishment={warn}>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2"/>{dictionary.words.reason}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2 text-rose-500"/>{dictionary.words.reason}</h3>
             <p>{warn.reason}</p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2 text-sky-500"/>{dictionary.words.date}</h3>
             <p><RelativeTimeTooltip lang={lang} time={warn.time}/></p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><MdOutlineNotificationsActive className="mr-2"/>{dictionary.words.notified}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><MdOutlineNotificationsActive className="mr-2 text-cyan-500"/>{dictionary.words.notified}</h3>
             <p>{warn.warned ? dictionary.words.yes : dictionary.words.no}</p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2 text-emerald-500"/>{dictionary.words.originServer}</h3>
             <p>{warn.server}</p>
           </div>
           <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
+            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2 text-indigo-500"/>{dictionary.words.serverScope}</h3>
             <p>{formatScope(warn.serverScope)}</p>
           </div>
           {warn.revoked && (
             <div className="space-y-1">
-              <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
+              <h3 className="inline-flex items-center text-lg font-medium"><PiProhibitBold className="mr-2 text-red-500"/>{localDictionary.table.active.revoked}</h3>
               {warn.removed_by_date instanceof Date && (
                 <p className="flex items-center">
                   <PunishmentStatusDot
@@ -136,48 +136,6 @@ export default async function Warn({
           )}
         </PunishmentInfoCard>
 
-        <div className="block md:hidden order-3 mx-auto space-y-4 w-[350px]">
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><PiScrollFill className="mr-2"/>{dictionary.words.reason}</h3>
-            <p>{warn.reason}</p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><IoCalendar className="mr-2"/>{dictionary.words.date}</h3>
-            <p><RelativeTimeTooltip lang={lang} time={warn.time}/></p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><MdOutlineNotificationsActive className="mr-2"/>{dictionary.words.notified}</h3>
-            <p>{warn.warned ? dictionary.words.yes : dictionary.words.no}</p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaEarthEurope className="mr-2"/>{dictionary.words.originServer}</h3>
-            <p>{warn.server}</p>
-          </div>
-          <div className="space-y-1">
-            <h3 className="inline-flex items-center text-lg font-medium"><FaServer className="mr-2"/>{dictionary.words.serverScope}</h3>
-            <p>{formatScope(warn.serverScope)}</p>
-          </div>
-          {warn.revoked && (
-            <div className="space-y-1 inline-flex flex-col w-full">
-              <h3 className="inline-flex items-center text-lg font-medium mx-auto"><PiProhibitBold className="mr-2"/>{localDictionary.table.active.revoked}</h3>
-              {warn.removed_by_date instanceof Date && (
-                <p className="flex items-center mx-auto">
-                  <PunishmentStatusDot
-                    dictionary={localDictionary}
-                    status={false}
-                    tooltipOverride={localDictionary.table.active.revoked}
-                    variant="revoked"
-                  />
-                  <RelativeTimeTooltip lang={lang} time={warn.removed_by_date}/>
-                </p>
-              )}
-              <p className="mx-auto">{p(localDictionary.table.revoked_by, { staff: warn.removed_by_name ?? dictionary.words.staff })}</p>
-              {warn.removed_by_reason && (
-                <p className="text-xs text-muted-foreground text-center">{warn.removed_by_reason}</p>
-              )}
-            </div>
-          )}
-        </div>
       </section>
     </div>
   )
