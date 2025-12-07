@@ -54,7 +54,7 @@ export default async function Home(searchParams: SearchParams) {
       })}
       className="w-full space-y-6"
     >
-      <div className="mx-auto grid gap-4 sm:grid-cols-2 sm:w-[496px] lg:grid-cols-4 lg:w-[1024px]">
+      <div className="mx-auto grid w-full max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <PunishmentTypeCard
           title={q(dictionary.words.bans, banCount)}
           fromGradient="from-red-500/10"
@@ -84,7 +84,7 @@ export default async function Home(searchParams: SearchParams) {
           punishmentIcon={Icons.kick({ className: "size-[8.5rem] opacity-20 absolute top-[-35px] right-[-25px] text-sky-600 ml-2 blur-sm transition duration-700 group-hover:opacity-40 group-hover:scale-110" })}
         />
       </div>
-      <div className="mx-auto w-full lg:w-[1024px]">
+      <div className="mx-auto w-full max-w-5xl">
         <HistoryTable page={page} player={player} staff={staff} idOnEdge />
       </div>
     </DefaultPage>

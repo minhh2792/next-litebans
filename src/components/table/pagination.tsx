@@ -86,8 +86,12 @@ export const TablePagination = ({
           />
         </PaginationItem>
         
+        <PaginationItem className="sm:hidden">
+          <span className="px-2 text-xs text-muted-foreground">{actualPage} / {totalPages}</span>
+        </PaginationItem>
+
         {pages.map((page) => (
-          <PaginationItem key={page}>
+          <PaginationItem key={page} className="hidden sm:list-item">
             <PaginationLink 
               href={`${pathname}?${createQueryString(page)}`} 
               isActive={actualPage === page}

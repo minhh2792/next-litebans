@@ -38,8 +38,8 @@ export const BansTable = async ({
   return (
     <div className="space-y-2">
       <Filters player={player} staff={staff} />
-      <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
-        <Table>
+      <ScrollArea className="shadow border rounded-lg lg:rounded-xl">
+        <Table className="min-w-[840px] text-xs sm:text-sm">
           <TableHeader>
             <TableRow className="bg-muted/50">
               <TableHead className="text-center w-16 !px-1">{dictionary.words.id ?? "ID"}</TableHead>

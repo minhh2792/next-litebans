@@ -40,8 +40,8 @@ export const HistoryTable = async ({
   return (
     <div className="space-y-2">
       <Filters player={player} staff={staff} />
-      <ScrollArea className="shadow border-y lg:rounded-xl lg:border">
-        <Table>
+      <ScrollArea className="shadow border rounded-lg lg:rounded-xl">
+        <Table className="min-w-[960px] text-xs sm:text-sm">
           <TableHeader>
             <TableRow className="bg-muted/50">
               {idOnEdge && (

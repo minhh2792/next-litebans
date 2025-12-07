@@ -38,7 +38,7 @@ export const PunishmentTypeCard = ({
       href={href}
     >
       <Card 
-        className={cn("overflow-hidden mx-auto w-60 h-36 flex-col flex items-center relative transition ease-in-out hover:scale-110 hover:bg-gradient-to-tr to-transparent group", fromGradient)}
+        className={cn("overflow-hidden mx-auto h-36 w-full max-w-xs sm:max-w-sm flex-col flex items-center relative transition ease-in-out hover:scale-110 hover:bg-gradient-to-tr to-transparent group", fromGradient)}
       >
         {punishmentIcon}
         <CardContent className="text-center mt-auto z-[1]">
