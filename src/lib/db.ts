@@ -4,6 +4,22 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-export const db = globalThis.prisma || new PrismaClient();
+const dbInstance = globalThis.prisma || new PrismaClient();
 
-if (process.env.NODE_ENV !== "production") globalThis.prisma = db;
+// Attach a single global error guard to avoid leaking connection details to the UI.
+if (!(dbInstance as any)._hasErrorGuard) {
+  dbInstance.$use(async (params, next) => {
+    try {
+      return await next(params);
+    } catch (error) {
+      console.error("[DB] Prisma error", error);
+      throw new Error("Không thể kết nối tới database, vui lòng thử lại sau.");
+    }
+  });
+
+  (dbInstance as any)._hasErrorGuard = true;
+}
+
+export const db = dbInstance;
+
+if (process.env.NODE_ENV !== "production") globalThis.prisma = dbInstance;
