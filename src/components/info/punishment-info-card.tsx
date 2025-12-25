@@ -26,19 +26,19 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
   
   return (
     <div className="w-full">
-      <div className="grid w-full gap-6 rounded-xl border bg-card/80 p-4 shadow-sm sm:grid-cols-2 sm:p-5 md:grid-cols-[1fr_minmax(280px,1.1fr)_1fr] md:p-6">
+      <div className="grid w-full gap-4 grid-cols-2 rounded-xl border bg-card/80 p-4 shadow-sm sm:gap-6 sm:p-5 md:grid-cols-[1fr_minmax(280px,1.1fr)_1fr] md:p-6">
         <div className="flex flex-col items-center gap-3 text-center sm:text-left">
           <h2 className="text-xl font-semibold text-muted-foreground">{dictionary.words.player}</h2>
           <Link href={`/@${punishment.name}`} className="block w-full">
             <AvatarBody 
               uuid={punishment.uuid!} 
               name={punishment.name!} 
-              className="mx-auto h-[220px] max-w-[220px] transition hover:scale-105 md:h-[280px]"
+              className="mx-auto h-[160px] max-w-[160px] transition hover:scale-105 sm:h-[190px] sm:max-w-[190px] md:h-[260px] md:max-w-[260px]"
             />
             <AvatarBust 
               uuid={punishment.uuid!} 
               name={punishment.name!} 
-              className="mx-auto transition hover:scale-105"
+              className="mx-auto h-[56px] w-auto transition hover:scale-105 sm:h-[64px] md:h-[72px]"
             />
           </Link>
           <div className="flex items-center space-x-2 text-sm text-foreground/90">
@@ -53,7 +53,7 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
           </div>
         </div>
 
-        <div className="order-3 space-y-4 rounded-lg border bg-card/40 p-4 sm:col-span-2 sm:order-2 md:order-2 md:col-auto md:border-l md:border-r md:p-5">
+        <div className="order-3 col-span-2 space-y-4 rounded-lg border bg-card/40 p-4 sm:order-2 md:order-2 md:col-auto md:border-l md:border-r md:p-5">
           {children}
         </div>
 
@@ -64,13 +64,13 @@ export const PunishmentInfoCard = async ({ punishment, children }: PunishmentInf
               uuid={punishment.banned_by_uuid!} 
               name={punishment.banned_by_name!} 
               console={punishment.console} 
-              className="mx-auto h-[220px] max-w-[220px] scale-x-[-1] transition hover:scale-x-[-1.05] hover:scale-y-105 md:h-[280px]"
+              className="mx-auto h-[160px] max-w-[160px] scale-x-[-1] transition hover:scale-x-[-1.05] hover:scale-y-105 sm:h-[190px] sm:max-w-[190px] md:h-[260px] md:max-w-[260px]"
             />
             <AvatarBust 
               uuid={punishment.banned_by_uuid!} 
               name={punishment.banned_by_name!} 
               console={punishment.console} 
-              className="mx-auto scale-x-[-1] transition hover:scale-x-[-1.05] hover:scale-y-105"
+              className="mx-auto h-[56px] w-auto scale-x-[-1] transition hover:scale-x-[-1.05] hover:scale-y-105 sm:h-[64px] md:h-[72px]"
             />
           </Link>
           <div className="flex items-center space-x-2 text-sm text-foreground/90">
